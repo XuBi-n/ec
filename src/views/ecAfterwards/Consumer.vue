@@ -14,24 +14,28 @@
                 border
                 style="width: 100%;">
             <el-table-column
-                    prop="ID"
+                    prop="id"
                     label="序号"
                     width="50">
             </el-table-column>
             <el-table-column
-                    prop="userNo"
+                    prop="account"
                     label="账号"
                     width="400">
             </el-table-column>
             <el-table-column
-                    prop="username"
+                    prop="name"
                     label="姓名"
                     width="160">
             </el-table-column>
             <el-table-column
-                    prop="role"
-                    label="姓名"
+                    prop="isAdmin"
+                    label="是否为管理员"
                     width="185">
+              <template slot-scope="scope">
+                <span v-if="scope.row.isAdmin === 0">否</span>
+                <span v-else>是</span>
+              </template>
             </el-table-column>
             <el-table-column
                     prop="phone"
@@ -39,10 +43,19 @@
                     width="330">
             </el-table-column>
             <el-table-column
-                    prop="very"
+                    prop="useStatus"
                     label="使用状态"
                     width="220">
+              <template slot-scope="scope">
+                <span v-if="scope.row.useStatus === 0">冻结</span>
+                <span v-else>正常</span>
+              </template>
             </el-table-column>
+          <el-table-column
+              prop="address"
+              label="住址"
+              width="220">
+          </el-table-column>
             <el-table-column
                     label="操作"
                     width="300">
@@ -70,11 +83,16 @@
 <script>
     export default {
         name: "consumer",
-        data() {
+      created() {
+        this.$axios.get("getPuser").then(res=>{
+          this.tableData=res.data.list
+        }).catch(err=>{
+
+        })
+      },
+      data() {
             return {
-                tableData: [{
-                    ID:1,userNo:'99213248',username:'张三',role:'店长',phone:1869999999,very:'启用'
-                }]
+                tableData: []
             }
         }
     }
