@@ -1,0 +1,72 @@
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Login from "../views/Login";
+import Home from "../views/ecAfterwards/Home";
+import Index from "../views/ecAfterwards/Index";
+import Control from "../views/ecAfterwards/Control";
+import ProductList from "../views/ecAfterwards/ProductList";
+import News from "../views/ecAfterwards/News";
+
+Vue.use(VueRouter)
+
+const routes = [
+  {
+    path: '/',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home,
+    children:[
+      {
+        path: '/index',
+        name: 'Index',
+        meta: {
+          title: "首页"
+        },
+        component: Index
+      },
+      {
+        path: '/control',
+        name: 'Control',
+        meta: {
+          title: "商品一级类别管理"
+        },
+        component: () => import('../views/ecAfterwards/Control.vue')
+      },
+      {
+        path: '/pl',
+        name: 'ProductList',
+        meta: {
+          title: "产品列表"
+        },
+        component: () => import('../views/ecAfterwards/ProductList.vue')
+      },
+      {
+        path: '/news',
+        name: 'News',
+        meta: {
+          title: "新闻管理"
+        },
+        component: () => import('../views/ecAfterwards/News.vue')
+      },
+    ]
+  },
+  // {
+  //   path: '/about',
+  //   name: 'About',
+  //   // route level code-splitting
+  //   // this generates a s
+  //   parate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  // }
+]
+
+const router = new VueRouter({
+  routes
+})
+
+export default router
