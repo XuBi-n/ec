@@ -1,14 +1,13 @@
 <template>
+
     <div>
+
         <div slot="header" class="clearfix">
-            <span style="float: left;">新闻管理</span>
-            <span style="float: right">所属分类：
-                  <select>
-                      <option>所有</option>
-                  </select>
+            <span style="float: left;">用户管理</span>
+            <span style="float: right">账号或姓名：
+                    <input type="text" ><el-button  type="button">搜索</el-button>
                  <el-button  type="button">添加</el-button>
             </span>
-
         </div>
         <el-table
                 :data="tableData"
@@ -16,18 +15,33 @@
                 style="width: 100%;">
             <el-table-column
                     prop="ID"
-                    label="编号"
-                    width="280">
+                    label="序号"
+                    width="50">
             </el-table-column>
             <el-table-column
-                    prop="types"
-                    label="标题"
-                    width="860">
+                    prop="userNo"
+                    label="账号"
+                    width="400">
             </el-table-column>
             <el-table-column
-                    prop="date"
-                    label="日期"
-                    width="180">
+                    prop="username"
+                    label="姓名"
+                    width="160">
+            </el-table-column>
+            <el-table-column
+                    prop="role"
+                    label="姓名"
+                    width="185">
+            </el-table-column>
+            <el-table-column
+                    prop="phone"
+                    label="电话"
+                    width="330">
+            </el-table-column>
+            <el-table-column
+                    prop="very"
+                    label="使用状态"
+                    width="220">
             </el-table-column>
             <el-table-column
                     label="操作"
@@ -50,15 +64,16 @@
             <span>输入页数: <input type="text" style="width: 25px"> <input type="button" value="确定" disabled=""></span>
         </div>
     </div>
+
 </template>
 
 <script>
     export default {
-        name: "News",
+        name: "consumer",
         data() {
             return {
                 tableData: [{
-                    ID:1,date:'2021-12-30',types:'家用洗衣机'
+                    ID:1,userNo:'99213248',username:'张三',role:'店长',phone:1869999999,very:'启用'
                 }]
             }
         }

@@ -35,7 +35,7 @@
                     <el-button type="primary">下一页</el-button>
                     <el-button type="primary">尾页</el-button>
                 </el-button-group>
-                <span>当前页面1/1&nbsp;</span>
+                <span>当前页数:1/1&nbsp;</span>
                 <span>输入页数: <input type="text" style="width: 25px"> <input type="button" value="确定" disabled=""></span>
             </div>
         </div>

@@ -6,6 +6,8 @@ import Index from "../views/ecAfterwards/Index";
 import Control from "../views/ecAfterwards/Control";
 import ProductList from "../views/ecAfterwards/ProductList";
 import News from "../views/ecAfterwards/News";
+import Consumer from "../views/ecAfterwards/Consumer";
+import Adduser from "../views/ecAfterwards/Adduser";
 
 Vue.use(VueRouter)
 
@@ -51,6 +53,22 @@ const routes = [
           title: "新闻管理"
         },
         component: () => import('../views/ecAfterwards/News.vue')
+      },
+      {
+        path: '/users',
+        name: 'Consumer',
+        meta: {
+          title: "用户管理"
+        },
+        component: () => import('../views/ecAfterwards/Consumer.vue')
+      },
+      {
+        path: '/add',
+        name: 'Adduser',
+        meta: {
+          title: "新增用户"
+        },
+        component: () => import('../views/ecAfterwards/Adduser.vue')
       },
     ]
   },
