@@ -66,15 +66,15 @@
             </el-table-column>
         </el-table>
         <div>
-            <span >共有 <span style="color: coral">{{tableData.length}}</span> 条记录</span>
+            <span >共有 <span style="color: coral">{{totals}}</span> 条记录</span>
             <el-button-group>
-                <el-button type="primary">首页</el-button>
-                <el-button type="primary">上一页</el-button>
-                <el-button type="primary">下一页</el-button>
-                <el-button type="primary">尾页</el-button>
+                <el-button type="primary" @click="cli('homeP')">首页</el-button>
+                <el-button type="primary" @click="cli('prevP')">上一页</el-button>
+                <el-button type="primary" @click="cli('nextP')">下一页</el-button>
+                <el-button type="primary" @click="cli('lastP')">尾页</el-button>
             </el-button-group>
-            <span>当前页数:1/1&nbsp;</span>
-            <span>输入页数: <input type="text" style="width: 25px"> <input type="button" value="确定" disabled=""></span>
+            <span>当前页数:{{pageNum}}/{{pages}}&nbsp;</span>
+            <span>输入页数: <input type="text" v-model="val" style="width: 25px"> <input type="button" @click="toPage()" value="确定"></span>
         </div>
     </div>
 
@@ -83,16 +83,42 @@
 <script>
     export default {
         name: "consumer",
-      created() {
-        this.$axios.get("getPuser").then(res=>{
+      methods:{
+        toPage:function () {
+          this.$axios.get("/toPage?val="+this.val).then(res=>{
+            this.page(res)
+          }).catch(err=>{
+
+          })
+        },
+        page:function (res){
           this.tableData=res.data.list
+          this.totals=res.data.total
+          this.pageNum=res.data.pageNum
+          this.pages=res.data.pages
+        },
+        cli:function (value){
+          this.$axios.get("/refreshto?val="+value).then(res=>{
+            this.page(res)
+          }).catch(err=>{
+
+          })
+        }
+      },
+      created() {
+        this.$axios.get("/getPuser").then(res=>{
+          this.page(res)
         }).catch(err=>{
 
         })
       },
       data() {
             return {
-                tableData: []
+                val:'',
+                tableData: [],
+                totals: 0,
+                pageNum: 0,
+                pages:0
             }
         }
     }
