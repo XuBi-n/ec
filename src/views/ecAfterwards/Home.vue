@@ -103,7 +103,10 @@
       },
         created() {
           this.$axios.get("selUser?user="+this.$route.params.id).then(res=>{
-            this.msg = res.data.name
+            if (res.data.name != null) {
+              sessionStorage.setItem("name",res.data.name)
+            }
+            this.msg=sessionStorage.getItem("name")
           }).catch(err=>{
 
           })
