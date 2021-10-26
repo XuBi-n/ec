@@ -99,7 +99,7 @@
       methods:{
         handleCurrentChange (currentPage) {
           const _this = this
-          this.$axios.get('/refreshto?currentPage='+currentPage+'&pageSize=4').then(function (resp) {
+          this.$axios.get('/refreshto?currentPage='+currentPage+'&pageSize=4&val='+this.selVal).then(function (resp) {
             _this.tableData = resp.data.list
             _this.totalNum = resp.data.total
           })
