@@ -66,29 +66,21 @@
             </el-table-column>
 
         </el-table>
-      <div>
-        <el-pagination
-            background
-            layout="total,prev, pager, next,jumper"
-            @current-change="handleCurrentChange"
-            @size-change="handleSizeChange"
-            page-size="4"
-            :current-page="currentPage"
-            :total="totalNum">
-        </el-pagination>
-      </div>
-        <div>
+      <div v-if="pageshow">
 
-<!--            <span >共有 <span style="color: coral">{{totals}}</span> 条记录</span>-->
-<!--            <el-button-group>-->
-<!--                <el-button type="primary" @click="cli()">首页</el-button>-->
-<!--                <el-button type="primary" @click="cli()">上一页</el-button>-->
-<!--                <el-button type="primary" @click="cli()">下一页</el-button>-->
-<!--                <el-button type="primary" @click="cli()">尾页</el-button>-->
-<!--            </el-button-group>-->
-<!--            <span>当前页数:{{pageNum}}/{{pages}}&nbsp;</span>-->
-<!--            <span>输入页数: <input type="text" v-model="val" style="width: 25px"> <input type="button" @click="toPage()" value="确定"></span>-->
-        </div>
+        <el-button type="button" @click="jumpPage('head')">首页</el-button>
+        <el-pagination ref="pagination"
+                       background prev-text="上一页" next-text="下一页"
+                       layout="prev, pager, next, slot,jumper"
+                       @current-change="handleCurrentChange"
+                       :current-page="currentPage"
+                       :total="totalNum"
+                       :page-size="pagesize"
+                       style="display: inline-block;padding-left: 0px;">
+        </el-pagination>
+        <el-button type="button" @click="jumpPage('foot')">尾页</el-button>
+      </div>
+
     </div>
 
 </template>
@@ -97,6 +89,28 @@
     export default {
         name: "consumer",
       methods:{
+          me1:function (resp,val){
+            const _this = this
+            _this.tableData = resp.data.list
+            _this.totalNum = resp.data.total
+            _this.currentPage = val;//cur_page 当前页
+            _this.pageshow = false;//让分页隐藏
+            _this.$nextTick(() => {//重新渲染分页
+              _this.pageshow = true;
+            });
+          },
+        jumpPage:function (val) {
+          const _this = this
+          if (val=='head'){
+            this.$axios.get('/refreshto?currentPage=1&pageSize=4&val='+this.selVal).then(function (resp) {
+              _this.me1(resp,1)
+            })
+          }else{
+            this.$axios.get('/refreshto?currentPage='+_this.pages+'&pageSize=4&val='+this.selVal).then(function (resp) {
+              _this.me1(resp,_this.pages)
+            })
+          }
+        },
         handleCurrentChange (currentPage) {
           const _this = this
           this.$axios.get('/refreshto?currentPage='+currentPage+'&pageSize=4&val='+this.selVal).then(function (resp) {
@@ -107,10 +121,8 @@
         sel:function (){
           const _this = this
           this.$axios.get("/refreshto?currentPage=1&pageSize=4&val="+this.selVal).then(resp=>{
-            _this.tableData = resp.data.list
-            _this.totalNum = resp.data.total
-          }).catch(err=>{
-
+            _this.pages=resp.data.pages
+            _this.me1(resp,1)
           })
         }
       },
@@ -119,6 +131,7 @@
         this.$axios.get('/refreshto?currentPage=1&pageSize=4').then(function (resp) {
           _this.tableData = resp.data.list
           _this.totalNum = resp.data.total
+          _this.pages=resp.data.pages
         })
       },
       data() {
@@ -127,13 +140,14 @@
               tableData: [],
               pagesize: '4',
               totalNum: '',
-              currentPage: '1',
+              currentPage: "1",
               selVal:'',
+              pageshow: true,
+              pages:0,
             }
         }
     }
 </script>
 
-<style scoped>
-
+<style>
 </style>
