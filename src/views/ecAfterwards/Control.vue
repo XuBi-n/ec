@@ -2,7 +2,7 @@
         <div>
             <div slot="header" class="clearfix">
                 <span style="float: left;">商品一级类别管理</span>
-                <el-button style="float: right;margin-top: 65px" type="button">添加</el-button>
+                <el-button style="float: right;margin-top: 65px" type="button" @click="dialogVisible=true">添加</el-button>
             </div>
             <el-table
                     :data="tableData"
@@ -22,7 +22,7 @@
                         label="操作"
                         width="300">
                     <template slot-scope="scope">
-                        <el-button  type="text" size="small">修改</el-button>
+                        <el-button  type="text" size="small" @click="updateDialogVisible=true">修改</el-button>
                         <el-button type="text" size="small">删除</el-button>
                     </template>
                 </el-table-column>
@@ -38,21 +38,78 @@
                 <span>当前页数:1/1&nbsp;</span>
                 <span>输入页数: <input type="text" style="width: 25px"> <input type="button" value="确定" disabled=""></span>
             </div>
+
+
+            <!--添加框-->
+            <el-dialog
+                    title="添加一级类别"
+                    :visible.sync="dialogVisible"
+                    width="660px"
+                    :before-close="handleClose">
+                <el-form :model="addForm" :rules="addFormControl" ref="addForm" label-width="100px" class="demo-editForm">
+                    <el-form-item label="一级类别名称" prop="name" label-width="180px">
+                        <el-input v-model="addForm.types" autocomplete="off"></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="resetForm('addForm')">取 消</el-button>
+                    <el-button type="primary"  >添 加</el-button>
+                </div>
+            </el-dialog>
+
+
+<!--            修改框-->
+            <el-dialog
+                    title="修改类别"
+                    :visible.sync="updateDialogVisible"
+                    width="660px">
+                <el-form :model="updateForm">
+                    <el-form-item label="一级类别名称" prop="name" label-width="180px">
+                        <el-input v-model="tableData.types" autocomplete="off"></el-input>
+                    </el-form-item>
+                </el-form>
+                <span slot="footer" class="dialog-footer">
+                <el-button @click="updateDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="">修 改</el-button>
+            </span>
+            </el-dialog>
+
         </div>
+
+
+
 </template>
 
 <script>
     export default {
         name: "Control",
         methods: {
+            handleClose(){
+                this.resetForm('addForm')
+            },
+            resetForm(formName) {
+                this.$refs[formName].resetFields();
+                this.dialogVisible=false
+                this.addForm={}
+            },
 
         },
 
         data() {
             return {
+                dialogVisible:false,
+                addForm:[],
+                updatTreeData:[],
+                updateForm: {},
+                updateDialogVisible:false,
                 tableData: [{
                     ID:1,types:'家用洗衣机'
-                }]
+                }],
+                addFormControl: {
+                    types: [
+                        {required: true, message: '请输入一级类别名称', trigger: 'blur'}
+                    ]
+                },
             }
         }
     }
