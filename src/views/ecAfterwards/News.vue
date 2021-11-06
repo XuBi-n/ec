@@ -99,7 +99,7 @@
         data() {
             return {
                 updateDialogVisible:false,
-                dialogVisible:false,
+                dialogVisible:false，
                 updateForm:{},
                 addForm:{},
                 tableData: [{
