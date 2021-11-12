@@ -1,0 +1,17 @@
+@import "clear.css";
+html,body,div,p,ul,li,ol,dl,dt,dd,table,a,h1,h2,h3,h4,h5,h6{
+    margin: 0;
+    padding: 0;
+}
+html{
+    font-size: 10px;
+}
+ul,ol,dl{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.scene{
+    width: 500px;
+}

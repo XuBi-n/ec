@@ -40,10 +40,15 @@
                     <i class="el-icon-pie-chart"></i>
                     <span slot="title">数据统计</span>
                 </el-menu-item>
-                <el-menu-item index="5">
-                    <i class="el-icon-setting"></i>
-                    <span slot="title">系统设置</span>
-                </el-menu-item>
+              <el-submenu index="5">
+                <template slot="title">
+                  <i class="el-icon-setting"></i>
+                  <span>系统设置</span>
+                </template>
+                <el-menu-item-group>
+                  <el-menu-item index="5-1">修改密码</el-menu-item>
+                </el-menu-item-group>
+              </el-submenu>
                 <el-menu-item index="6">
                     <i class="el-icon-document"></i>
                     <span slot="title">知识库管理</span>
@@ -131,7 +136,7 @@
         /*background-color: #E9EEF3;*/
         color: #333;
         text-align: center;
-        line-height: 160px;
+        /*line-height: 100px;*/
     }
 
 

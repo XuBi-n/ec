@@ -1,0 +1,157 @@
+@for $i from 10 through 30 {
+  .fsize-#{$i} {
+    font-size: $i * 1px;
+  }
+}
+@for $i from 10 through 100 {
+  .mlf-#{$i} {
+    margin-left: $i * 1px;
+  }
+}
+@for $i from 10 through 100 {
+  .mri-#{$i} {
+    margin-right: $i * 1px;
+  }
+}
+@for $i from 1 through 100 {
+  .hp-#{$i} {
+    height: $i * 1%;
+  }
+}
+@for $i from 1 through 100 {
+  .wp-#{$i} {
+    height: $i * 1%;
+  }
+}
+@for $i from 0 through 5 {
+  .grow-#{$i} {
+    flex-grow: $i;
+  }
+}
+@for $i from 0 through 5 {
+  .shrink-#{$i} {
+    flex-shrink: $i;
+  }
+}
+@for $i from 1 through 20 {
+  .hei-#{$i} {
+    height: $i*50px;
+  }
+}
+@for $i from 1 through 20 {
+  .wid-#{$i} {
+    width: $i*50px;
+  }
+}
+@for $i from 1 through 5 {
+  .radiu-#{$i} {
+    border-radius: $i*10%;
+  }
+}
+.fxh{
+  display: flex;
+  flex-flow: row wrap;
+}
+.fxv{
+  display: flex;
+  flex-flow: column wrap;
+}
+.jus-start{
+  justify-content: flex-start;
+}
+.jus-center{
+  justify-content:center;
+}
+.jus-between{
+  justify-content: space-between;
+}
+.jus-even{
+  justify-content: space-evenly;
+}
+.jus-around{
+  justify-content: space-around;
+}
+.jus-end{
+  justify-content: flex-end;
+}
+.dir-col{
+  flex-direction: column;
+}
+.align-start{
+  align-items: flex-start;
+}
+.align-end{
+  align-items: flex-end;
+}
+.align-line{
+  align-items: baseline;
+}
+.align-center{
+  align-items: center;
+}
+.acont-center{
+  align-content: center;
+}
+.acont-start{
+  align-content: flex-start;
+}
+.acont-end{
+  align-content: flex-end;
+}
+.acont-around{
+  align-content: space-around;
+}
+.acont-evenly{
+  align-content: space-evenly;
+}
+.acont-between{
+  align-content: space-between;
+}
+.acont-line{
+  align-content: baseline;
+}
+.wrap{
+  flex-wrap:wrap;
+}
+.no-wrap{
+  flex-wrap:nowrap;
+}
+
+.self-start{
+  align-self: flex-start;
+}
+.self-end{
+  align-self: flex-end;
+}
+.self-center{
+  align-self: center;
+}
+.self-line{
+  align-self: baseline;
+}
+
+.dcenter{
+  margin: 0 auto;
+}
+.tcenter{
+  text-align: center;
+}
+.tleft{
+  text-align: left;
+}
+.tright{
+  text-align: right;
+}
+
+.bred{
+  background: red;
+}
+.byellow{
+  background: yellowgreen;
+}
+.borange{
+  background: orange;
+}
+.bpink{
+  background: pink;
+}

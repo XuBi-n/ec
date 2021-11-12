@@ -8,6 +8,7 @@ import ProductList from "../views/ecAfterwards/ProductList";
 import News from "../views/ecAfterwards/News";
 import Consumer from "../views/ecAfterwards/Consumer";
 import Adduser from "../views/ecAfterwards/Adduser";
+import ChangePassword from  "../views/ecAfterwards/ChangePassword";
 
 Vue.use(VueRouter)
 
@@ -69,6 +70,14 @@ const routes = [
           title: "新增用户"
         },
         component: () => import('../views/ecAfterwards/Adduser.vue')
+      },
+      {
+        path:'/pwd',
+        name:'ChangePassword',
+        meta: {
+          title: "修改密码"
+        },
+        component: ()=>import('../views/ecAfterwards/ChangePassword')
       },
     ]
   },
