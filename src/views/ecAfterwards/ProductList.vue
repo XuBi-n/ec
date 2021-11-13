@@ -2,7 +2,7 @@
     <div>
         <div slot="header" class="clearfix">
             <span style="float: left;">产品列表</span>
-            <span>名称：
+            <span style="float: right">名称：
                 <input type="text">
                 <input type="button" value="搜索">
                 <input type="button" value="添加">
