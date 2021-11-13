@@ -72,7 +72,7 @@
                     </template>
                     <el-menu-item-group>
                         <el-menu-item index="10-1" @click="fun()">员工列表</el-menu-item>
-                        <el-menu-item index="10-2">员工增加</el-menu-item>
+                        <el-menu-item index="10-2" @click="add()">员工增加</el-menu-item>
                         <el-menu-item index="10-3">权限设置</el-menu-item>
                     </el-menu-item-group>
                 </el-submenu>
@@ -110,6 +110,9 @@
         },
         changePwd:function (){
           this.$router.push("/pwd")
+        },
+        add:function (){
+          this.$router.push("/add")
         }
 
       },
