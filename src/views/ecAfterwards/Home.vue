@@ -23,7 +23,7 @@
                         <el-menu-item index="1-4">资讯管理</el-menu-item>
                         <el-menu-item index="1-5">评价管理</el-menu-item>
                         <el-menu-item index="1-6">会员管理</el-menu-item>
-                        <el-menu-item index="1-7">优惠劵管理</el-menu-item>
+                        <el-menu-item index="1-7" @click="coupon()">优惠劵管理</el-menu-item>
                         <el-menu-item index="1-8">认筹劵管理</el-menu-item>
                         <el-menu-item index="1-9">认筹劵领用管理</el-menu-item>
                     </el-menu-item-group>
@@ -104,7 +104,11 @@
       methods:{
         fun:function () {
           this.$router.push("/users")
+        },
+        coupon:function (){
+          this.$router.push("/coupon")
         }
+
       },
         created() {
           this.$axios.get("selUser?user="+this.$route.params.id).then(res=>{
