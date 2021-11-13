@@ -46,7 +46,7 @@
                   <span>系统设置</span>
                 </template>
                 <el-menu-item-group>
-                  <el-menu-item index="5-1">修改密码</el-menu-item>
+                  <el-menu-item index="5-1" @click="changePwd()">修改密码</el-menu-item>
                 </el-menu-item-group>
               </el-submenu>
                 <el-menu-item index="6">
@@ -107,6 +107,9 @@
         },
         coupon:function (){
           this.$router.push("/coupon")
+        },
+        changePwd:function (){
+          this.$router.push("/pwd")
         }
 
       },
