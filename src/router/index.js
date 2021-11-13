@@ -9,6 +9,7 @@ import News from "../views/ecAfterwards/News";
 import Consumer from "../views/ecAfterwards/Consumer";
 import Adduser from "../views/ecAfterwards/Adduser";
 import ChangePassword from  "../views/ecAfterwards/ChangePassword";
+import Couponmanagement from "../views/ecAfterwards/Couponmanagement"
 
 Vue.use(VueRouter)
 
@@ -78,6 +79,14 @@ const routes = [
           title: "修改密码"
         },
         component: ()=>import('../views/ecAfterwards/ChangePassword')
+      },
+      {
+        path: '/coupon',
+        name: 'Couponmanagement',
+        meta: {
+          title: "优惠券管理"
+        },
+        component: () => import('../views/ecAfterwards/Couponmanagement.vue')
       },
     ]
   },
