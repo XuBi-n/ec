@@ -10,7 +10,7 @@ import Consumer from "../views/ecAfterwards/Consumer";
 import Adduser from "../views/ecAfterwards/Adduser";
 import ChangePassword from  "../views/ecAfterwards/ChangePassword";
 import Couponmanagement from "../views/ecAfterwards/Couponmanagement"
-
+import  OrderManagement from  '../views/ecAfterwards/OrderManagement'
 Vue.use(VueRouter)
 
 const routes = [
@@ -87,6 +87,14 @@ const routes = [
           title: "优惠券管理"
         },
         component: () => import('../views/ecAfterwards/Couponmanagement.vue')
+      },
+      {
+        path:'/order',
+        name:'OrderManagement',
+        meta:{
+          title:"订单管理"
+        },
+        component: ()=>import("../views/ecAfterwards/OrderManagement")
       },
     ]
   },

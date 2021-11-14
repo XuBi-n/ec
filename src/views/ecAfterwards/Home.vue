@@ -18,7 +18,7 @@
                     </template>
                     <el-menu-item-group>
                         <el-menu-item index="1-1">产品管理</el-menu-item>
-                        <el-menu-item index="1-2">产品一级分类</el-menu-item>
+                        <el-menu-item index="1-2" @click="control()">产品一级分类</el-menu-item>
                         <el-menu-item index="1-3">产品二级分类</el-menu-item>
                         <el-menu-item index="1-4">资讯管理</el-menu-item>
                         <el-menu-item index="1-5">评价管理</el-menu-item>
@@ -113,6 +113,9 @@
         },
         add:function (){
           this.$router.push("/add")
+        },
+        control:function (){
+          this.$router.push("/control")
         }
 
       },

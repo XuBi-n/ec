@@ -2,7 +2,7 @@
         <div>
             <div slot="header" class="clearfix">
                 <span style="float: left;">商品一级类别管理</span>
-                <el-button style="float: right;margin-top: 65px" type="button" @click="dialogVisible=true">添加</el-button>
+                 <el-button  style="float: right" type="button" @click="dialogVisible=true">添加</el-button>
             </div>
             <el-table
                     :data="tableData"
@@ -27,7 +27,7 @@
                     </template>
                 </el-table-column>
             </el-table>
-            <div>
+            <div style="float: right">
                 <span >共有 <span style="color: coral">{{tableData.length}}</span> 条记录</span>
                 <el-button-group>
                     <el-button type="primary">首页</el-button>
@@ -50,6 +50,16 @@
                     <el-form-item label="一级类别名称" prop="name" label-width="180px">
                         <el-input v-model="addForm.types" autocomplete="off"></el-input>
                     </el-form-item>
+                  <el-form-item label="排序" prop="orderby" label-width="180px">
+                    <el-input v-model="addForm.orderby" autocomplete="off"></el-input>
+                  </el-form-item>
+                  <el-form-item label="是否推荐" prop="yesNo" label-width="180px">
+                      <el-select v-model="addForm.yesNo" placeholder="否" style="float: left">
+                        <el-option label="是" value="shanghai"></el-option>
+                        <el-option label="否" value="beijing"></el-option>
+                      </el-select>
+                  </el-form-item>
+
                 </el-form>
                 <div slot="footer" class="dialog-footer">
                     <el-button @click="resetForm('addForm')">取 消</el-button>
@@ -98,7 +108,11 @@
         data() {
             return {
                 dialogVisible:false,
-                addForm:[],
+                addForm: {
+                  types:'',
+                  orderby:'',
+                  yesNo:''
+                },
                 updatTreeData:[],
                 updateForm: {},
                 updateDialogVisible:false,

@@ -38,7 +38,7 @@
                 </template>
             </el-table-column>
         </el-table>
-        <div>
+        <div style="float: right">
             <span >共有 <span style="color: coral">{{tableData.length}}</span> 条记录</span>
             <el-button-group>
                 <el-button type="primary">首页</el-button>
@@ -57,12 +57,40 @@
                 width="660px"
                 :before-close="handleClose">
             <el-form :model="addForm" :rules="addFormControl" ref="addForm" label-width="100px" class="demo-editForm">
+                <el-form-item label="所属栏目" prop="types" label-width="180px">
+                  <el-select v-model="addForm.types" placeholder="活动方案" style="float: left">
+                    <el-option label="活动方案" value="shanghai"></el-option>
+                  </el-select>
+                </el-form-item>
                 <el-form-item label="标题" prop="name" label-width="180px">
-                    <el-input v-model="addForm.types" autocomplete="off"></el-input>
+                    <el-input v-model="addForm.name" autocomplete="off"></el-input>
                 </el-form-item>
-                <el-form-item label="日期" prop="name" label-width="180px">
-                    <el-input v-model="addForm.date" autocomplete="off"></el-input>
-                </el-form-item>
+              <el-form-item label="链接地址" prop="url" label-width="180px">
+                <el-input v-model="addForm.url" autocomplete="off"></el-input>
+              </el-form-item>
+              <el-form-item label="封面图片" prop="images" label-width="180px">
+                <el-upload
+                    class="upload-demo"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :before-remove="beforeRemove"
+                    multiple
+                    :limit="3"
+                    :on-exceed="handleExceed"
+                    :file-list="fileList" style="float: left">
+                  <el-button size="small" type="primary">选择文件</el-button>
+                  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                </el-upload>
+              </el-form-item>
+              <el-form-item label="内容" prop="textarea" label-width="200px">
+                <el-input
+                    type="textarea"
+                    :rows="2"
+                    placeholder="请输入内容"
+                    v-model="addForm.textarea">
+                </el-input>
+              </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="resetForm('addForm')">取 消</el-button>
@@ -101,17 +129,32 @@
                 updateDialogVisible:false,
                 dialogVisible:false,
                 updateForm:{},
-                addForm:{},
+                addForm:{
+                  types:'',
+                  name:'',
+                  url:'',
+                  image:'',
+                  textarea:''
+                },
+              fileList: [{
+                  name: 'food.jpeg',
+                url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+              },
+                {
+                  name: 'food2.jpeg',
+                  url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+                }],
                 tableData: [{
                     ID:1,date:'2021-12-30',types:'家用洗衣机'
                 }],
                 addFormControl: {
-                    types: [
-                        {required: true, message: '请输入标题！', trigger: 'blur'}
+                  name: [
+                    {required: true, message: '请输入标题！', trigger: 'blur'}
+                  ],
+                  url: [
+                        {required: true, message: '请输入链接地址！', trigger: 'blur'}
                     ],
-                    date: [
-                        {required: true, message: '请输入日期！', trigger: 'blur'}
-                    ]
+
                 },
             }
         },
@@ -124,6 +167,18 @@
                 this.dialogVisible=false
                 this.addForm={}
             },
+          handleRemove(file, fileList) {
+            console.log(file, fileList);
+          },
+          handlePreview(file) {
+            console.log(file);
+          },
+          handleExceed(files, fileList) {
+            this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+          },
+          beforeRemove(file, fileList) {
+            return this.$confirm(`确定移除 ${ file.name }？`);
+          }
         }
     }
 </script>
